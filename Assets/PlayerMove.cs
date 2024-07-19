@@ -5,9 +5,10 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     [SerializeField] float _speed;
-    [SerializeField] float _jumppower;
+    [SerializeField] float _jumppower = 3;
     Rigidbody2D _rb;
     float _index;
+    int _jumpCount = 1;
     Animator Animator;
     SpriteRenderer _spriteRenderer;
 
@@ -37,9 +38,10 @@ public class PlayerMove : MonoBehaviour
             _spriteRenderer.flipX = true;
         }
 
-        if ( Input.GetKeyDown(KeyCode.Space) )
+        if (Input.GetKeyDown(KeyCode.Space) && _jumpCount > 0)
         {
-            _rb.velocity = new Vector2(0, _jumppower);
+             _rb.velocity = new Vector2(0, _jumppower);
+            _jumpCount = 0;
         }
     }
     private void FixedUpdate()
